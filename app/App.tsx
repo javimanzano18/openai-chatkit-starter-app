@@ -13,6 +13,23 @@ export default function App() {
     }
   }, []);
 
+
+
+      if (action.type === "open.url") {
+      const href = action.payload?.href; // el link viene en payload.href
+      if (href) {
+        window.open(href, "_blank", "noopener,noreferrer"); // abre en nueva pestaña
+      } else {
+        console.warn("No se especificó href en el payload del botón open.url");
+      }
+    }
+  }, []);
+
+  
+
+
+
+  
   const handleResponseEnd = useCallback(() => {
     if (process.env.NODE_ENV !== "production") {
       console.debug("[ChatKitPanel] response end");
