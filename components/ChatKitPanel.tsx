@@ -341,15 +341,6 @@ export function ChatKitPanel({
     },
   });
 
-
-  useEffect(() => {
-  // Conecta las acciones del widget (botones con handler:"client") a tu función onWidgetAction
-  if (!chatkit?.chatKit) return;
-  chatkit.chatKit.setOptions({
-    widgets: { onAction: onWidgetAction },
-  });
-}, [chatkit.chatKit, onWidgetAction]);
-
   
   const activeError = errors.session ?? errors.integration;
   const blockingError = errors.script ?? activeError;
