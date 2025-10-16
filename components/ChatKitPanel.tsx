@@ -11,7 +11,7 @@ import {
   getThemeConfig,
 } from "@/lib/config";
 import { ErrorOverlay } from "./ErrorOverlay";
-import type { ColorScheme } from "@/hooks/useColorScheme";Asi
+import type { ColorScheme } from "@/hooks/useColorScheme";
 
 export type FactAction =
   | {
