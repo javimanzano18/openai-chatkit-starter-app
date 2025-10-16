@@ -8,29 +8,41 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 export default function App() {
   const { scheme, setScheme } = useColorScheme();
 
-  // ✅ handler sin tipado restrictivo
   const handleWidgetAction = useCallback(async (action: unknown) => {
-    if (process.env.NODE_ENV !== "production") {
-      console.info("[ChatKitPanel] widget action", action);
+  if (process.env.NODE_ENV !== "production") {
+    console.info("[ChatKitPanel] widget action", action);
+  }
+  
+  // ✅ Validación de tipo completa antes de acceder a propiedades
+  if (!action || typeof action !== 'object') {
+    return;
+  }
+  
+  // ✅ Type guard: verifica que 'type' existe
+  if (!('type' in action)) {
+    return;
+  }
+  
+  // ✅ Ahora TypeScript sabe que action tiene la propiedad 'type'
+  const typedAction = action as { type: string; payload?: { href?: string } };
+  
+  if (typedAction.type === "open.url") {
+    const href = typedAction.payload?.href;
+    if (href) {
+      window.open(href, "_blank", "noopener,noreferrer");
+    } else {
+      console.warn("No se especificó href en el payload del botón open.url");
     }
-
-    if (action?.type === "open.url") {
-      const href = action?.payload?.href as string | undefined;
-      if (href) {
-        window.open(href, "_blank", "noopener,noreferrer");
-      } else {
-        console.warn("No se especificó href en el payload del botón open.url");
-      }
-    }
-
-    if (action?.type === "carousel.next") {
-      // TODO: mover carrusel a siguiente
-    }
-
-    if (action?.type === "carousel.prev") {
-      // TODO: mover carrusel a anterior
-    }
-  }, []);
+  }
+  
+  if (typedAction.type === "carousel.next") {
+    // TODO: mover carrusel a siguiente
+  }
+  
+  if (typedAction.type === "carousel.prev") {
+    // TODO: mover carrusel a anterior
+  }
+}, []);
 
   const handleResponseEnd = useCallback(() => {
     if (process.env.NODE_ENV !== "production") {
