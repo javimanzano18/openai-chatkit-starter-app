@@ -9,7 +9,7 @@ export default function App() {
   const { scheme, setScheme } = useColorScheme();
 
   // ✅ handler sin tipado restrictivo
-  const handleWidgetAction = useCallback(async (action: any) => {
+  const handleWidgetAction = useCallback(async (action: unknown) => {
     if (process.env.NODE_ENV !== "production") {
       console.info("[ChatKitPanel] widget action", action);
     }
@@ -44,7 +44,7 @@ export default function App() {
         {/* ✅ pasamos un wrapper para evitar tipado contextual de la prop */}
         <ChatKitPanel
           theme={scheme}
-          onWidgetAction={(a) => handleWidgetAction(a as any)}
+          onWidgetAction={handleWidgetAction}
           onResponseEnd={handleResponseEnd}
           onThemeRequest={setScheme}
         />
