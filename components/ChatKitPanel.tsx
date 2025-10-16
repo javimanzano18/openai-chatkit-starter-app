@@ -32,7 +32,7 @@ export type FactAction =
 
 type ChatKitPanelProps = {
   theme: ColorScheme;
-  onWidgetAction: (action: any) => Promise<void>;
+  onWidgetAction: (action: unknown) => Promise<void>;
   onResponseEnd: () => void;
   onThemeRequest: (scheme: ColorScheme) => void;
 };
