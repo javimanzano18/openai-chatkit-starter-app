@@ -11,11 +11,7 @@ export default function App() {
     if (process.env.NODE_ENV !== "production") {
       console.info("[ChatKitPanel] widget action", action);
     }
-  }, []);
-
-
-
-      if (action.type === "open.url") {
+    if (action.type === "open.url") {
       const href = action.payload?.href; // el link viene en payload.href
       if (href) {
         window.open(href, "_blank", "noopener,noreferrer"); // abre en nueva pestaña
