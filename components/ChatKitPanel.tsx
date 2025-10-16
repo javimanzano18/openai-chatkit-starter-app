@@ -292,6 +292,10 @@ export function ChatKitPanel({
     threadItemActions: {
       feedback: false,
     },
+    // ✅ AGREGA ESTA SECCIÓN
+  widgets: {
+    onAction: onWidgetAction,
+  },
     onClientTool: async (invocation: {
       name: string;
       params: Record<string, unknown>;
