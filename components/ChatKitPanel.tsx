@@ -11,13 +11,24 @@ import {
   getThemeConfig,
 } from "@/lib/config";
 import { ErrorOverlay } from "./ErrorOverlay";
-import type { ColorScheme } from "@/hooks/useColorScheme";
+import type { ColorScheme } from "@/hooks/useColorScheme";Asi
 
-export type FactAction = {
-  type: "save";
-  factId: string;
-  factText: string;
-};
+export type FactAction =
+  | {
+      type: "save";
+      factId: string;
+      factText: string;
+    }
+  | {
+      type: "open.url";
+      payload: { href: string };
+    }
+  | {
+      type: "carousel.next";
+    }
+  | {
+      type: "carousel.prev";
+    };
 
 type ChatKitPanelProps = {
   theme: ColorScheme;
@@ -330,6 +341,16 @@ export function ChatKitPanel({
     },
   });
 
+
+  useEffect(() => {
+  // Conecta las acciones del widget (botones con handler:"client") a tu función onWidgetAction
+  if (!chatkit?.chatKit) return;
+  chatkit.chatKit.setOptions({
+    widgets: { onAction: onWidgetAction },
+  });
+}, [chatkit.chatKit, onWidgetAction]);
+
+  
   const activeError = errors.session ?? errors.integration;
   const blockingError = errors.script ?? activeError;
 
