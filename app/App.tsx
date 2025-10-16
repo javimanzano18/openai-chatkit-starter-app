@@ -1,9 +1,9 @@
 "use client";
 
 import { useCallback } from "react";
-// ❌ NO importes `type FactAction` aquí
 import { ChatKitPanel } from "@/components/ChatKitPanel";
 import { useColorScheme } from "@/hooks/useColorScheme";
+
 
 export default function App() {
   const { scheme, setScheme } = useColorScheme();
